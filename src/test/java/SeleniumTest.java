@@ -1,8 +1,10 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -15,7 +17,9 @@ public class SeleniumTest {
     public void initTest() throws Exception {
         String browserName = System.getProperty("browserName");
         if ("chrome".equalsIgnoreCase(browserName)){
-            driver = new ChromeDriver();
+            ChromeOptions options = new ChromeOptions();
+            options.setExperimentalOption("useAutomationExtension", false);
+            driver = new ChromeDriver(options);
         } else if ("ie".equalsIgnoreCase(browserName)) {
             driver = new InternetExplorerDriver();
         } else {
@@ -43,5 +47,10 @@ public class SeleniumTest {
                 return !d.getTitle().toLowerCase().contains("yahoo");
             }
         });
+    }
+
+    @AfterClass
+    public void afterTest() {
+        driver.close();
     }
 }
