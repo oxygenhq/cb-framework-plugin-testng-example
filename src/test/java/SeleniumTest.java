@@ -17,9 +17,9 @@ public class SeleniumTest {
     public void initTest() throws Exception {
         String browserName = System.getProperty("browserName");
         if ("chrome".equalsIgnoreCase(browserName)){
-            ChromeOptions options = new ChromeOptions();
-            options.setExperimentalOption("useAutomationExtension", false);
-            driver = new ChromeDriver(options);
+            String path = System.getProperty("user.dir");
+            System.setProperty("webdriver.chrome.driver", path+"\\resources\\chromedriver.exe");
+            driver = new ChromeDriver();
         } else if ("ie".equalsIgnoreCase(browserName)) {
             driver = new InternetExplorerDriver();
         } else {
@@ -45,6 +45,39 @@ public class SeleniumTest {
         new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
                 return !d.getTitle().toLowerCase().contains("yahoo");
+            }
+        });
+    }
+
+    @Test
+    public void checkTitle3() {
+        driver.get("https:\\www.google.com");
+
+        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.getTitle().toLowerCase().contains("google");
+            }
+        });
+    }
+
+    @Test
+    public void checkTitle4() {
+        driver.get("https:\\www.google.com");
+
+        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.getTitle().toLowerCase().contains("google");
+            }
+        });
+    }
+
+    @Test
+    public void checkTitle5() {
+        driver.get("https:\\www.google.com");
+
+        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.getTitle().toLowerCase().contains("google");
             }
         });
     }
