@@ -1,6 +1,7 @@
+package Selenium;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -15,7 +16,7 @@ public class SeleniumTest {
 
     @BeforeClass
     public void initTest() throws Exception {
-        String browserName = System.getProperty("browserName");
+        String browserName = "chrome";
         if ("chrome".equalsIgnoreCase(browserName)){
             String path = System.getProperty("user.dir");
             System.setProperty("webdriver.chrome.driver", path+"\\resources\\chromedriver.exe");
@@ -27,8 +28,8 @@ public class SeleniumTest {
         }
     }
 
-    @Test
-    public void checkTitle1() {
+    @Test(groups = {"success"})
+    public void successGoogleTest() {
         driver.get("https:\\www.google.com");
 
         new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
@@ -38,49 +39,17 @@ public class SeleniumTest {
         });
     }
 
-    @Test
-    public void checkTitle2() {
+    @Test(groups = {"fail"})
+    public void failYahooTest() {
         driver.get("https:\\www.google.com");
 
         new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
             public Boolean apply(WebDriver d) {
-                return !d.getTitle().toLowerCase().contains("yahoo");
+                return d.getTitle().toLowerCase().contains("yahoo");
             }
         });
     }
 
-    @Test
-    public void checkTitle3() {
-        driver.get("https:\\www.google.com");
-
-        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver d) {
-                return d.getTitle().toLowerCase().contains("google");
-            }
-        });
-    }
-
-    @Test
-    public void checkTitle4() {
-        driver.get("https:\\www.google.com");
-
-        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver d) {
-                return d.getTitle().toLowerCase().contains("google");
-            }
-        });
-    }
-
-    @Test
-    public void checkTitle5() {
-        driver.get("https:\\www.google.com");
-
-        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
-            public Boolean apply(WebDriver d) {
-                return d.getTitle().toLowerCase().contains("google");
-            }
-        });
-    }
 
     @AfterClass
     public void afterTest() {
