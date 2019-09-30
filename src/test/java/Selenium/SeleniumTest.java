@@ -50,6 +50,49 @@ public class SeleniumTest {
         });
     }
 
+    @Test(groups = {"success"})
+    public void successNoYahooTest() {
+        driver.get("https:\\www.google.com");
+
+        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return !d.getTitle().toLowerCase().contains("yahoo");
+            }
+        });
+    }
+
+    @Test(groups = {"success"})
+    public void successYahooTest() {
+        driver.get("https:\\www.yahoo.com");
+
+        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.getTitle().toLowerCase().contains("yahoo");
+            }
+        });
+    }
+
+    @Test(groups = {"fail"})
+    public void failGoogleTest() {
+        driver.get("https:\\www.yahoo.com");
+
+        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return d.getTitle().toLowerCase().contains("google");
+            }
+        });
+    }
+
+    @Test(groups = {"success"})
+    public void successNoGoogleTest() {
+        driver.get("https:\\www.yahoo.com");
+
+        new WebDriverWait(driver,10L).until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver d) {
+                return !d.getTitle().toLowerCase().contains("google");
+            }
+        });
+    }
 
     @AfterClass
     public void afterTest() {
