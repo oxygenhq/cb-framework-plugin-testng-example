@@ -7,12 +7,12 @@ import org.testng.annotations.Test;
 @Listeners(io.cloudbeat.testng.Plugin.class)
 public class UnitTest {
 
-    @Test(groups = {"success"})
+    @Test(groups = {"success", "unit"})
     public void successEqualityTest() {
         Assert.assertEquals(3, 1+2);
     }
 
-    @Test(groups = {"fail"})
+    @Test(groups = {"fail", "unit"})
     public void failEqualityTest() {
         Assert.assertEquals(3, 1+1);
     }
