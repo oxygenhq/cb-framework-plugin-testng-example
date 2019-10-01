@@ -13,7 +13,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners(io.cloudbeat.testng.Plugin.class)
-public class SeleniumTest {
+public class SeleniumTest extends io.cloudbeat.testng.TestNGRunner {
     private WebDriver driver;
 
     @BeforeClass
@@ -30,6 +30,8 @@ public class SeleniumTest {
         } else {
             throw new Exception("Invalid browserName: " + browserName);
         }
+
+        setWebDriver(driver);
     }
 
     @Test(groups = {"success"})
