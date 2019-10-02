@@ -18,7 +18,7 @@ public class UnitTest {
     }
     
     @Test(groups = {"pass", "unit"})
-    public void failEqualityTest() {
+    public void successEqualityTest() {
         Assert.assertEquals(18, 8+10);
     }
 }
