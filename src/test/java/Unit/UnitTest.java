@@ -9,16 +9,12 @@ public class UnitTest {
 
     @Test(groups = {"success", "unit"})
     public void successEqualityTest() {
-        Assert.assertEquals(3, 1+2);
+        Assert.assertEquals(4, 2+2);
     }
 
     @Test(groups = {"fail", "unit"})
     public void failEqualityTest() {
         Assert.assertEquals(3, 1+1);
     }
-    
-    @Test(groups = {"pass", "unit"})
-    public void successEqualityTest() {
-        Assert.assertEquals(18, 8+10);
-    }
+
 }
