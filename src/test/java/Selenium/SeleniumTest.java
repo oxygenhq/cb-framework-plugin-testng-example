@@ -27,6 +27,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTest {
 
     @Test(groups = {"fail"})
     public void failYahooTest() {
+        startStep("345");
         driver.get("https:\\www.google.com");
         Assert.assertTrue(driver.getTitle().toLowerCase().contains("yahoo"));
     }
