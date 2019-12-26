@@ -8,7 +8,7 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners(io.cloudbeat.testng.Plugin.class)
-public class SeleniumTest extends io.cloudbeat.testng.CbTest {
+public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
 
     @BeforeClass
     public void initTest() throws Exception {
