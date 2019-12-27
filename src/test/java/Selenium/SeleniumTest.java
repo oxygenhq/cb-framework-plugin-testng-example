@@ -9,7 +9,6 @@ import org.testng.annotations.Test;
 
 @Listeners(io.cloudbeat.testng.Plugin.class)
 public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
-
     @BeforeClass
     public void initTest() throws Exception {
         WebDriver driver = createWebDriverBasedOnCbCapabilities();
