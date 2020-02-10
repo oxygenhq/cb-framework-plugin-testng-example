@@ -63,8 +63,6 @@ public class SeleniumTest extends io.cloudbeat.testng.TestNGRunner {
 
     @Test(groups = {"fail", "e2e"})
     public void failGoogleTest() {
-        startStep("CustomStep1");
-        startStep("CustomStep2");
         driver.get("https:\\www.yahoo.com");
         Assert.assertTrue(driver.getTitle().toLowerCase().contains("google"));
     }
