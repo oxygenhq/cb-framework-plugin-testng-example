@@ -1,18 +1,18 @@
 package Selenium;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
+import java.util.Date;
 
 @Listeners(io.cloudbeat.testng.Plugin.class)
 public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
 
-    private String harelHomeUrl = "https://www.harel-group.co.il/Pages/default.aspx";
+    private String harelHomeUrl = "https://travel.harel-group.co.il/abroad-policy/";
 
     @BeforeClass
     public void initTest() throws Exception {
@@ -20,96 +20,144 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         setWebDriver(driver);
     }
 
-    @Test
-    public void TestAppPageReachable() {
+    @Test(groups = {"No", "Success"})
+    public void TestEmptyToDateError() {
         driver.get(harelHomeUrl);
-        driver.findElement(By.xpath("//a[@title='חיפוש אודות סטטוס תביעה']")).click();
-        driver.findElement(By.xpath("//a[@title='הגשתי תביעה במסגרת פוליסת ביטוח למקרה מוות. איך אוכל לברר מה מצב התביעה?']")).click();
-        driver.findElement(By.xpath("//a[@title='קידוד קופות']")).click();
-        String currentUrl = driver.getCurrentUrl();
-        Assert.assertTrue(currentUrl.contains("app"));
+        driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerNo']")).click();
+
+        driver.findElement(By.id("travellers")).click();
+
+        driver.findElement(By.id("firstName1")).sendKeys("abc");
+        driver.findElement(By.id("lastName1")).sendKeys("dvq");
+        driver.findElement(By.xpath("//label[@for='gender1-1']")).click();
+        driver.findElement(By.id("dob1")).sendKeys("111111");
+        driver.findElement(By.xpath("//button[@data-hrl-bo='modal-travellers-confirm']")).click();
+
+        new Select(driver.findElement(By.id("destination"))).selectByIndex(1);
+        driver.findElement(By.xpath("//button[@data-hrl-bo='continueButton']")).click();
+        Assert.assertTrue(driver.findElement(By.id("todate-error-span")).isDisplayed());
     }
 
-    @Test
-    public void PensionPageReachable() {
-        String pensionUrl = "harel-group.co.il/long-term-savings/pension/join/Pages/join-pension.aspx";
-
+    @Test(groups = {"No", "Success"})
+    public void TestEmptyFromDateError() {
         driver.get(harelHomeUrl);
-        driver.findElement(By.xpath("//a[@title='קרנות פנסיה']")).click();
-        driver.findElement(By.xpath("//a[@title='להצטרפות עכשיו']")).click();
-        String currentUrl = driver.getCurrentUrl();
-        Assert.assertTrue(currentUrl.contains(pensionUrl));
+        driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerNo']")).click();
+
+        driver.findElement(By.id("travellers")).click();
+
+        driver.findElement(By.id("firstName1")).sendKeys("abc");
+        driver.findElement(By.id("lastName1")).sendKeys("dvq");
+        driver.findElement(By.xpath("//label[@for='gender1-1']")).click();
+        driver.findElement(By.id("dob1")).sendKeys("111111");
+        driver.findElement(By.xpath("//button[@data-hrl-bo='modal-travellers-confirm']")).click();
+
+        new Select(driver.findElement(By.id("destination"))).selectByIndex(1);
+        driver.findElement(By.xpath("//button[@data-hrl-bo='continueButton']")).click();
+        Assert.assertTrue(driver.findElement(By.id("fromdate-error-span")).isDisplayed());
     }
 
-    @Test
-    public void TestSearchInputWorks() {
+    @Test(groups = {"No", "Success"})
+    public void TestEmptyFirstNameError() {
         driver.get(harelHomeUrl);
-        driver.findElement(By.id("searchBox")).sendKeys("abc");
-        driver.findElement(By.xpath("//a[@title='חיפוש']")).click();
-        Assert.assertTrue(driver.getCurrentUrl().contains("SearchPage"));
+        driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerNo']")).click();
+        driver.findElement(By.id("travellers")).click();
+        driver.findElement(By.id("lastName1")).sendKeys("dvq");
+        driver.findElement(By.xpath("//label[@for='gender1-1']")).click();
+        driver.findElement(By.id("dob1")).sendKeys("111111");
+        driver.findElement(By.xpath("//button[@data-hrl-bo='modal-travellers-confirm']")).click();
+        Assert.assertTrue(driver.findElement(By.id("travelerfirstnameerror1")).isDisplayed());
     }
 
-    @Test
-    public void TestLoginIdErrorShowing() {
+    @Test(groups = {"No", "Success"})
+    public void TestEmptyLastNameError() {
         driver.get(harelHomeUrl);
-        driver.findElement(By.xpath("//button[@data-hrl-bo='atm-personalMenuArrow']")).click();
-        driver.findElement(By.id("idUser")).sendKeys("abc");
-        driver.findElement(By.xpath("//button[@data-hrl-bo='atm-personalMenuLogin']")).click();
-        Assert.assertTrue(driver.findElement(By.id("idUser-helper-text")).isDisplayed());
+        driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerNo']")).click();
+        driver.findElement(By.id("travellers")).click();
+        driver.findElement(By.id("firstName1")).sendKeys("dvq");
+        driver.findElement(By.xpath("//label[@for='gender1-1']")).click();
+        driver.findElement(By.id("dob1")).sendKeys("111111");
+        driver.findElement(By.xpath("//button[@data-hrl-bo='modal-travellers-confirm']")).click();
+        Assert.assertTrue(driver.findElement(By.id("travelerlastnameerror1")).isDisplayed());
     }
 
-    @Test
-    public void TestLoginPhoneErrorShowing() {
+    @Test(groups = {"No", "Success"})
+    public void TestInfoShown() {
         driver.get(harelHomeUrl);
-        driver.findElement(By.xpath("//button[@data-hrl-bo='atm-personalMenuArrow']")).click();
-        driver.findElement(By.id("phone")).sendKeys("abc");
-        driver.findElement(By.xpath("//button[@data-hrl-bo='atm-personalMenuLogin']")).click();
-        Assert.assertTrue(driver.findElement(By.id("phone-helper-text")).isDisplayed());
+        driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerNo']")).click();
+        driver.findElement(By.xpath("//a[@data-hrl-bo='cover-1-info']")).click();
+        Assert.assertTrue(driver.findElement(By.className("hsg-modal-dialog")).isDisplayed());
     }
 
-    @Test
-    public void TestEmptyLoginErrorShowing() {
+    @Test(groups = {"Yes", "Success"})
+    public void TestExistUserEmptyPhoneError() {
         driver.get(harelHomeUrl);
-        driver.findElement(By.xpath("//button[@data-hrl-bo='atm-personalMenuArrow']")).click();
-        driver.findElement(By.xpath("//button[@data-hrl-bo='atm-personalMenuLogin']")).click();
-        Assert.assertTrue(driver.findElement(By.id("idUser-helper-text")).isDisplayed() && driver.findElement(By.id("phone-helper-text")).isDisplayed());
+        WebElement yesButton = driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerYes']"));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", yesButton);
+        driver.findElement(By.xpath("//button[@data-hrl-bo='continue']")).click();
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@data-hrl-bo='returnCustomerDataMobilePhonesuffixError']")).isDisplayed());
     }
 
-    @Test
-    public void TestCsrPageReachable() {
+    @Test(groups = {"Yes", "Success"})
+    public void TestExistUserEmptyIdError() {
         driver.get(harelHomeUrl);
-        driver.findElement(By.xpath("//a[@title='אחריות תאגידית']")).click();
-        Assert.assertTrue(driver.getCurrentUrl().contains("CSR"));
+        WebElement yesButton = driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerYes']"));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", yesButton);
+        driver.findElement(By.xpath("//button[@data-hrl-bo='continue']")).click();
+        Assert.assertTrue(driver.findElement(By.id("id-error-text")).isDisplayed());
     }
 
-    @Test
-    public void TestSearchPageReachable() {
-        String searchPageUrl = "https://www.harel-group.co.il/Search/Pages/formlocator.aspx";
-
+    @Test(groups = {"Yes", "Success"})
+    public void TestStartPageFromYesCondition() {
         driver.get(harelHomeUrl);
-        driver.findElement(By.xpath("//a[@title='לפרטים נוספים אודות ביטוח דירה לטווח קצר עבור רוכשי ביטוח הנסיעות לחו\"ל של הראל ']")).click();
-        driver.findElement(By.xpath("//a[@title='איתור טפסים']")).click();
-        String currentUrl = driver.getCurrentUrl();
-        Assert.assertEquals(searchPageUrl, currentUrl);
+        WebElement yesButton = driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerYes']"));
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", yesButton);
+        driver.findElement(By.xpath("//button[@data-hrl-bo='continueNoIdentify']")).click();
     }
 
-    @Test
-    public void TestSurgeonsPageReachable() {
+    @Test(groups = {"No", "Success"})
+    public void TestInsuranceEnabled() {
         driver.get(harelHomeUrl);
-        driver.findElement(By.xpath("//a[@title='כניסה לרופאים']")).click();
-        Assert.assertTrue(driver.getCurrentUrl().contains("surgeons"));
+        driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerNo']")).click();
+        Assert.assertTrue(driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[3]/div[2]/div/ul/li[1]/label")).isEnabled());
     }
 
-    @Test
-    public void TestAboutPageReachable() {
+    @Test(groups = {"No", "Fail"})
+    public void TestContinueWithoutDate() {
         driver.get(harelHomeUrl);
-        driver.findElement(By.xpath("//a[@title='אודות הראל']")).click();
-        Assert.assertTrue(driver.getCurrentUrl().contains("about"));
+        driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerNo']")).click();
+
+        driver.findElement(By.id("travellers")).click();
+
+        driver.findElement(By.id("firstName1")).sendKeys("abc");
+        driver.findElement(By.id("lastName1")).sendKeys("dvq");
+        driver.findElement(By.xpath("//label[@for='gender1-1']")).click();
+        driver.findElement(By.id("dob1")).sendKeys("111111");
+        driver.findElement(By.xpath("//button[@data-hrl-bo='modal-travellers-confirm']")).click();
+        new Select(driver.findElement(By.id("destination"))).selectByIndex(1);
+        driver.findElement(By.xpath("//button[@data-hrl-bo='continueButton']")).click();
+
+        driver.findElement(By.xpath("//label[@data-hrl-bo='primary-questions-answer-label-0-1']")).click();
+        driver.findElement(By.xpath("//label[@data-hrl-bo='primary-questions-answer-label-1-0']")).click();
+        driver.findElement(By.xpath("//label[@data-hrl-bo='primary-questions-answer-label-2-0']")).click();
+        driver.findElement(By.xpath("//label[@data-hrl-bo='primary-questions-answer-label-3-0']")).click();
+        driver.findElement(By.xpath("//button[@data-hrl-bo='continueButton']")).click();
+
+        driver.findElement(By.xpath("//label[@data-hrl-bo='secondary-questions-answer-label-0-0-0']")).click();
+        driver.findElement(By.xpath("//button[@data-hrl-bo='continueButton']")).click();
+        driver.findElement(By.xpath("//label[@data-hrl-bo='secondary-questions-answer-label-0-0-0']")).click();
+        driver.findElement(By.xpath("//button[@data-hrl-bo='continueButton']")).click();
+
+        driver.findElement(By.xpath("//label[@data-hrl-bo='modalAttentionFinishButton']")).click();
+        Assert.assertTrue(driver.findElement(By.id("todate-error-span")).isDisplayed());
     }
 
     @AfterClass
     public void afterTest() {
         try {
+            driver.quit();
             driver.close();
         }
         catch (Exception e) {
