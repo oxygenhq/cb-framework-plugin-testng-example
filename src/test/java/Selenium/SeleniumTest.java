@@ -7,8 +7,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.util.Date;
-
 @Listeners(io.cloudbeat.testng.Plugin.class)
 public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
 
@@ -124,11 +122,15 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         Assert.assertTrue(driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[3]/div[2]/div/ul/li[1]/label")).isEnabled());
     }
 
-    @Test(groups = {"No", "Fail"})
+    @Test(groups = {"No", "Fail","OnlyMe"})
     public void TestContinueWithoutDate() {
         driver.get(harelHomeUrl);
-        driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerNo']")).click();
+        WebDriverWait wait = new WebDriverWait(driver, 60);
 
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerNo']")));
+        driver.findElement(By.xpath("//button[@data-hrl-bo='returnCustomerQuestionAnswerNo']")).click();        
+        
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("travellers")));
         driver.findElement(By.id("travellers")).click();
 
         driver.findElement(By.id("firstName1")).sendKeys("abc");
