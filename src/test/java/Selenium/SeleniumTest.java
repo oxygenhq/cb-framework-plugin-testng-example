@@ -57,6 +57,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
 
     @AfterClass
     public void afterTest() {
-        driver.close();
+        if(driver != null)
+            driver.close();
     }
 }
