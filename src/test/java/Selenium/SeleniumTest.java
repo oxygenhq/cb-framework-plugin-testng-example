@@ -19,7 +19,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
     public void successGoogleTest() {
         startStep("123");
         startStep("345");
-        driver.get("https:\\www.google.com");
+        driver.get("https://www.google.com");
         Assert.assertTrue(driver.getTitle().toLowerCase().contains("google"));
         endStep("123");
     }
@@ -27,31 +27,31 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
     @Test(groups = {"fail"})
     public void failYahooTest() {
         startStep("345");
-        driver.get("https:\\www.google.com");
+        driver.get("https://www.google.com");
         Assert.assertTrue(driver.getTitle().toLowerCase().contains("yahoo"));
     }
 
     @Test(groups = {"success"})
     public void successNoYahooTest() {
-        driver.get("https:\\www.google.com");
+        driver.get("https://www.google.com");
         Assert.assertFalse(driver.getTitle().toLowerCase().contains("yahoo"));
     }
 
     @Test(groups = {"success"})
     public void successYahooTest() {
-        driver.get("https:\\www.yahoo.com");
+        driver.get("https://www.yahoo.com");
         Assert.assertTrue(driver.getTitle().toLowerCase().contains("yahoo"));
     }
 
     @Test(groups = {"fail"})
     public void failGoogleTest() {
-        driver.get("https:\\www.yahoo.com");
+        driver.get("https://www.yahoo.com");
         Assert.assertTrue(driver.getTitle().toLowerCase().contains("google"));
     }
 
     @Test(groups = {"success"})
     public void successNoGoogleTest() {
-        driver.get("https:\\www.yahoo.com");
+        driver.get("https://www.yahoo.com");
         Assert.assertFalse(driver.getTitle().toLowerCase().contains("google"));
     }
 
