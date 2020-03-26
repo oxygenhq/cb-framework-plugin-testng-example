@@ -1,5 +1,6 @@
 package Selenium;
 
+import io.cloudbeat.testng.CbTestNg;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -8,11 +9,10 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners(io.cloudbeat.testng.Plugin.class)
-public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
+public class SeleniumTest extends CbTestNg {
     @BeforeClass
     public void initTest() throws Exception {
-        WebDriver driver = createWebDriverBasedOnCbCapabilities();
-        setWebDriver(driver);
+        setupMobileDriver();
     }
 
     @Test(groups = {"success"})
