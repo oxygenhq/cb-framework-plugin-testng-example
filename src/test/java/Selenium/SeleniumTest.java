@@ -25,7 +25,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         endStep("Open web site");
 
         startStep("Select Dresses");
-        driver.findElement(By.xpath("(//a[contains(text(),'Dresses')]")).click();
+        driver.findElement(By.xpath("//a[contains(text(),'Dresses')]")).click();
         endStep("Select Dresses");
 
         startStep("Select Size");
@@ -57,7 +57,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         endStep("Select T shirts");
 
         startStep("Filter S");
-        driver.findElement(By.id("id=layered_id_attribute_group_1")).click();
+        driver.findElement(By.id("layered_id_attribute_group_1")).click();
         endStep("Filter S");
 
         startStep("Select Orange");
@@ -65,8 +65,8 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         endStep("Select Orange");
 
         startStep("Select Cotton");
-        driver.findElement(By.id("id=layered_id_attribute_group_13"));
-        driver.findElement(By.id("id=layered_id_feature_5"));
+        driver.findElement(By.id("layered_id_attribute_group_13"));
+        driver.findElement(By.id("layered_id_feature_5"));
         endStep("Select Cotton");
 
         startStep("Open Specials");
@@ -81,7 +81,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         endStep("Open web site");
 
         startStep("Select Dresses");
-        driver.findElement(By.xpath("(//a[contains(text(),'Dresses')]")).click();
+        driver.findElement(By.xpath("//a[contains(text(),'Dresses')]")).click();
         endStep("Select Dresses");
 
         startStep("Select Size");
@@ -108,7 +108,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         endStep("Select Women clothing");
 
         startStep("Select Tops");
-        driver.findElement(By.id("id=layered_category_4")).click();
+        driver.findElement(By.id("layered_category_4")).click();
         endStep("Select Tops");
 
         startStep("Select black");
