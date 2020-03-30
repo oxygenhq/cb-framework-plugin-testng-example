@@ -28,7 +28,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         endStep("Open web site");
 
         startStep("Select Dresses");
-        driver.findElement(By.xpath("//a[contains(text(),'Dresses')]")).click();
+        driver.findElement(By.linkText("Dresses")).click();
         endStep("Select Dresses");
 
         startStep("Select Size");
@@ -84,7 +84,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         endStep("Open web site");
 
         startStep("Select Dresses");
-        driver.findElement(By.xpath("//a[contains(text(),'Dresses')]")).click();
+        driver.findElement(By.linkText("Dresses")).click();
         endStep("Select Dresses");
 
         startStep("Select Size");
@@ -119,7 +119,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         endStep("Select black");
 
         startStep("Select cotton");
-        driver.findElement(By.id("layered_id_feature_5'")).click();
+        driver.findElement(By.id("layered_id_feature_5")).click();
         endStep("Select cotton");
 
         startStep("Open Specials");
