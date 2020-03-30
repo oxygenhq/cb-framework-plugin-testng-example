@@ -1,5 +1,6 @@
 package Selenium;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -9,50 +10,118 @@ import org.testng.annotations.Test;
 
 @Listeners(io.cloudbeat.testng.Plugin.class)
 public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
+
+    private String homeUrl = "http://automationpractice.com/index.php";
+
     @BeforeClass
     public void initTest() throws Exception {
-        WebDriver driver = createWebDriverBasedOnCbCapabilities();
-        setWebDriver(driver);
+        setupWebDriver();
     }
 
-    @Test(groups = {"success"})
-    public void successGoogleTest() {
-        startStep("123");
-        startStep("345");
-        driver.get("https://www.google.com");
-        Assert.assertTrue(driver.getTitle().toLowerCase().contains("google"));
-        endStep("123");
+    @Test(groups = {"success", "purchase"})
+    public void purchaseDress() {
+        startStep("Open web site");
+        driver.navigate().to(homeUrl);
+        endStep("Open web site");
+
+        startStep("Select Dresses");
+        driver.findElement(By.xpath("(//a[contains(text(),'Dresses")).click();
+        endStep("Select Dresses");
+
+        startStep("Select Size");
+        driver.findElement(By.id("layered_category_11")).click();
+        endStep("Select Size");
+
+        startStep("Select Color");
+        driver.findElement(By.linkText("Yellow (3)"));
+        endStep("Select Color");
+
+        startStep("Select Range");
+        driver.findElement(By.id("layered_id_attribute_group_16")).click();
+        endStep("Select Range");
+
+        startStep("Open Specials");
+        driver.findElement(By.xpath("//div[@id='special_block_right']/div/div/a/span")).click();
+        endStep("Open Specials");
+    }
+
+    @Test(groups = {"success", "purchase"})
+    public void purchaseTShirt() {
+
+        startStep("Open web site");
+        driver.navigate().to(homeUrl);
+        endStep("Open web site");
+
+        startStep("Select T shirts");
+        driver.findElement(By.linkText("T-SHIRTS")).click();
+        endStep("Select T shirts");
+
+        startStep("Filter S");
+        driver.findElement(By.id("id=layered_id_attribute_group_1")).click();
+        endStep("Filter S");
+
+        startStep("Select Orange");
+        driver.findElement(By.linkText("Orange (1)")).click();
+        endStep("Select Orange");
+
+        startStep("Select Cotton");
+        driver.findElement(By.id("id=layered_id_attribute_group_13"));
+        driver.findElement(By.id("id=layered_id_feature_5"));
+        endStep("Select Cotton");
+
+        startStep("Open Specials");
+        driver.findElement(By.xpath("//div[@id='special_block_right']/div/div/a/span")).click();
+        endStep("Open Specials");
     }
 
     @Test(groups = {"fail"})
-    public void failYahooTest() {
-        startStep("345");
-        driver.get("https://www.google.com");
-        Assert.assertTrue(driver.getTitle().toLowerCase().contains("yahoo"));
+    public void failPurchaseDress() {
+        startStep("Open web site");
+        driver.navigate().to(homeUrl);
+        endStep("Open web site");
+
+        startStep("Select Dresses");
+        driver.findElement(By.xpath("(//a[contains(text(),'Dresses")).click();
+        endStep("Select Dresses");
+
+        startStep("Select Size");
+        driver.findElement(By.id("layered_category_11")).click();
+        endStep("Select Size");
+
+        startStep("Select Color");
+        driver.findElement(By.linkText("Yellow (3)"));
+        endStep("Select Color");
+
+        startStep("Select Range");
+        driver.findElement(By.id("layered_id_attribute_group_116")).click();
+        endStep("Select Range");
     }
 
-    @Test(groups = {"success"})
-    public void successNoYahooTest() {
-        driver.get("https://www.google.com");
-        Assert.assertFalse(driver.getTitle().toLowerCase().contains("yahoo"));
-    }
+    @Test(groups = {"purchase", "success"})
+    public void purchaseWomenClothing() {
+        startStep("Open web site");
+        driver.navigate().to(homeUrl);
+        endStep("Open web site");
 
-    @Test(groups = {"success"})
-    public void successYahooTest() {
-        driver.get("https://www.yahoo.com");
-        Assert.assertTrue(driver.getTitle().toLowerCase().contains("yahoo"));
-    }
+        startStep("Select Women clothing");
+        driver.findElement(By.linkText("WOMEN")).click();
+        startStep("Select Women clothing");
 
-    @Test(groups = {"fail"})
-    public void failGoogleTest() {
-        driver.get("https://www.yahoo.com");
-        Assert.assertTrue(driver.getTitle().toLowerCase().contains("google"));
-    }
+        startStep("Select Tops");
+        driver.findElement(By.id("id=layered_category_4")).click();
+        endStep("Select Tops");
 
-    @Test(groups = {"success"})
-    public void successNoGoogleTest() {
-        driver.get("https://www.yahoo.com");
-        Assert.assertFalse(driver.getTitle().toLowerCase().contains("google"));
+        startStep("Select black");
+        driver.findElement(By.linkText("Black (2)")).click();
+        startStep("Select black");
+
+        startStep("Select cotton");
+        driver.findElement(By.id("layered_id_feature_5'")).click();
+        startStep("Select cotton");
+
+        startStep("Open Specials");
+        driver.findElement(By.xpath("//div[@id='special_block_right']/div/div/a/span")).click();
+        endStep("Open Specials");
     }
 
     @AfterClass
