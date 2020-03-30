@@ -8,6 +8,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.util.concurrent.TimeUnit;
+
 @Listeners(io.cloudbeat.testng.Plugin.class)
 public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
 
@@ -16,6 +18,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
     @BeforeClass
     public void initTest() throws Exception {
         setupWebDriver();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @Test(groups = {"success", "purchase"})
