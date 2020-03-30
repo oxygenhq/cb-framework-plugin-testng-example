@@ -128,7 +128,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
     }
 
     @Test(groups = {"success"})
-    public void addToCart() {
+    public void addToCart() throws InterruptedException {
         startStep("Open web site");
         driver.navigate().to(homeUrl);
         endStep("Open web site");
@@ -154,6 +154,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         endStep("Change quantity to 2");
 
         startStep("Verify price for 2 objects");
+        driver.wait(2000);
         Assert.assertEquals(driver.findElement(By.id("total_price")).getText(), "$35.02");
         endStep("Verify price for 2 objects");
 
