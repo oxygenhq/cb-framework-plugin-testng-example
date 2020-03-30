@@ -154,7 +154,10 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         endStep("Change quantity to 2");
 
         startStep("Verify price for 2 objects");
-        driver.wait(2000);
+        synchronized (driver)
+        {
+            driver.wait(2000);
+        }
         Assert.assertEquals(driver.findElement(By.id("total_price")).getText(), "$35.02");
         endStep("Verify price for 2 objects");
 
