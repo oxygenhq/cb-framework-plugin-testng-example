@@ -10,6 +10,9 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.hasProperty;
+
 @Listeners(io.cloudbeat.testng.Plugin.class)
 public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
 
@@ -17,8 +20,22 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
 
     @BeforeClass
     public void initTest() throws Exception {
+        setupTest();
         setupWebDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+
+    @Test(groups = {"API", "Sanity"}, description = "This is weather service API test.")
+    public void weatherApiTest() {
+        given()
+                .when()
+                .get("https://api.weather.gov/points/39.7456,-97.0892")
+                .then()
+                .statusCode(200)
+                .and()
+                .body("geometry", hasProperty("type"));
+        //body("MRData.CircuitTable.Circuits.circuitId",hasSize(20));
     }
 
     @Test(groups = {"success", "purchase"})
