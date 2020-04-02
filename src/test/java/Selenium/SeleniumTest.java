@@ -181,6 +181,60 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         endStep("Verify Payment");
     }
 
+    @Test(groups = {"fail"})
+    public void addToCartFail() throws InterruptedException {
+        startStep("Open web site");
+        driver.navigate().to(homeUrl);
+        endStep("Open web site");
+
+        startStep("Purchase T shirt");
+
+        startStep("Select T shirts");
+        driver.findElement(By.linkText("T-SHIRTS")).click();
+        endStep("Select T shirts");
+
+        startStep("Click on T shirt");
+        driver.findElement(By.xpath("(//div[@id='center_column']/ul/li/div/div[2]/div[2]/a/span)[1]")).click();
+        endStep("Click on T shirt");
+
+        endStep("Purchase T shirt");
+
+        startStep("Add to cart");
+        driver.findElement(By.xpath("//div[@id='layer_cart']/div/div[2]/div[4]/a/span")).click();
+        endStep("Add to cart");
+
+        startStep("Change quantity to 2");
+        driver.findElement(By.xpath("//a[2]/span/i")).click();
+        endStep("Change quantity to 2");
+
+        startStep("Verify price for 2 objects");
+        synchronized (driver)
+        {
+            driver.wait(2000);
+        }
+        Assert.assertEquals(driver.findElement(By.id("total_price")).getText(), "$36.02");
+        endStep("Verify price for 2 objects");
+
+        startStep("Insert Personal details");
+        driver.findElement(By.xpath("//div[@id='center_column']/p[2]/a/span")).click();
+        driver.findElement(By.id("email")).sendKeys("erandd@yahoo.com");
+        driver.findElement(By.id("passwd")).sendKeys("eran1234");
+        driver.findElement(By.xpath("//button[@id='SubmitLogin']/span")).click();
+        endStep("Insert Personal details");
+
+        startStep("Verify Shipping");
+        driver.findElement(By.xpath("//div[@id='center_column']/form/p/button/span")).click();
+        driver.findElement(By.id("cgv")).click();
+        driver.findElement(By.xpath("//form[@id='form']/p/button/span")).click();
+        endStep("Verify Shipping");
+
+        startStep("Verify Payment");
+        driver.findElement(By.xpath("(//div[@id='HOOK_PAYMENT']/div/div/p/a/span)[1]")).click();
+        driver.findElement(By.xpath("//p[@id='cart_navigation']/button/span")).click();
+        Assert.assertEquals(driver.findElement(By.xpath("//div[@id='center_column']/h1")).getText(), "ORDER CONFIRMATION");
+        endStep("Verify Payment");
+    }
+
     @AfterClass
     public void afterTest() {
         if(driver != null)
