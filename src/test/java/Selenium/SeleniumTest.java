@@ -66,6 +66,33 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
     }
 
     @Test(groups = {"success", "purchase"})
+    public void purchaseDress1() {
+        startStep("Open web site");
+        driver.navigate().to(homeUrl);
+        endStep("Open web site");
+
+        startStep("Select Dresses");
+        driver.findElement(By.linkText("DRESSES")).click();
+        endStep("Select Dresses");
+
+        startStep("Select Size");
+        driver.findElement(By.id("layered_category_11")).click();
+        endStep("Select Size");
+
+        startStep("Select Color");
+        driver.findElement(By.linkText("Yellow (3)"));
+        endStep("Select Color");
+
+        startStep("Select Range");
+        driver.findElement(By.id("layered_id_attribute_group_16")).click();
+        endStep("Select Range");
+
+        startStep("Open Specials");
+        driver.findElement(By.xpath("//div[@id='special_block_right']/div/div/a/span")).click();
+        endStep("Open Specials");
+    }
+
+    @Test(groups = {"success", "purchase"})
     public void purchaseTShirt() {
 
         startStep("Open web site");
