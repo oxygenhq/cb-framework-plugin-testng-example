@@ -202,7 +202,8 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
     public void addToCart() throws InterruptedException {
         startStep("Open web site");
         driver.navigate().to(homeUrl);
-
+        endStep("Open web site");
+        
         startStep("Purchase T shirt");
 
         startStep("Select T shirts");
@@ -249,14 +250,12 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         driver.findElement(By.xpath("//p[@id='cart_navigation']/button/span")).click();
         Assert.assertEquals(driver.findElement(By.xpath("//div[@id='center_column']/h1")).getText(), "ORDER CONFIRMATION");
         endStep("Verify Payment");
-        endStep("Open web site");
     }
 
     @Test(groups = {"fail"})
     public void addToCartFail() throws InterruptedException {
         startStep("Open web site");
         driver.navigate().to(homeUrl);
-        endStep("Open web site");
 
         startStep("Purchase T shirt");
 
@@ -304,6 +303,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
         driver.findElement(By.xpath("//p[@id='cart_navigation']/button/span")).click();
         Assert.assertEquals(driver.findElement(By.xpath("//div[@id='center_column']/h1")).getText(), "ORDER CONFIRMATION");
         endStep("Verify Payment");
+        endStep("Open web site");
     }
 
     @AfterClass
