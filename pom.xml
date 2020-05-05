@@ -16,11 +16,7 @@
     </repositories>
 
     <dependencies>
-        <dependency>
-            <groupId>com.github.oxygenhq</groupId>
-            <artifactId>cb-framework-plugin-testng</artifactId>
-            <version>0.10.1</version>
-        </dependency>
+
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
