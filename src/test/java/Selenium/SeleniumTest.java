@@ -44,7 +44,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
 
     @Test(groups = {"success", "purchase"})
     public void purchaseDress() {
-        startStep("Open web site");
+        startStep("Open the web site");
         driver.navigate().to(homeUrl);
         endStep("Open web site");
 
