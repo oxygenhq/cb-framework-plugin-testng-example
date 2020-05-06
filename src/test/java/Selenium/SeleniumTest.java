@@ -150,7 +150,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
 
     @Test(groups = {"success"})
     public void addToCartAndCheckout() throws InterruptedException {
-        startStep("Open web site");
+        startStep("Open the web site");
         driver.navigate().to(homeUrl);
         // maximize browser window to omit screen resolution related issues
         driver.manage().window().maximize();
