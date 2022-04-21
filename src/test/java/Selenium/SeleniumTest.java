@@ -46,7 +46,7 @@ public class SeleniumTest extends io.cloudbeat.testng.CbTestNg {
     public void purchaseDress() {
         startStep("Open the web site");
         driver.navigate().to(homeUrl);
-        endStep("Open web site");
+        endStep("Open the web site");
 
         startStep("Select Dresses");
         driver.findElement(By.linkText("DRESSES")).click();
